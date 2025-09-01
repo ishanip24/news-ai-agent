@@ -7,16 +7,39 @@ from tools.final_answer import FinalAnswerTool
 
 from Gradio_UI import GradioUI
 
-# Below is an example of a tool that does nothing. Amaze us with your creativity !
 @tool
-def my_custom_tool(arg1:str, arg2:int)-> str: #it's import to specify the return type
-    #Keep this format for the description / args / args description but feel free to modify the tool
-    """A tool that does nothing yet 
+def get_news_articles(
+    keywords: str,
+    region: str = "us-en",
+    safesearch: str = "moderate",
+    timelimit: str | None = None
+) -> list[dict[str, str]]:
+    """A tool that gets 3 news articles (title, url, date) for a given set of keywords.
+    
     Args:
-        arg1: the first argument
-        arg2: the second argument
+        keywords: keywords for query.
+        region: us-en, uk-en, ru-ru, etc. Defaults to "us-en".
+        safesearch: on, moderate, off. Defaults to "moderate".
+        timelimit: d, w, m. Defaults to None.
+    
+    Returns:
+        List of dictionaries with 'title', 'url', and 'date' keys.
     """
-    return "What magic will you build ?"
+    results = DDGS().news(
+        keywords=keywords,
+        region=region,
+        safesearch=safesearch,
+        timelimit=timelimit,
+        max_results=3
+    )
+    articles = []
+    for result in results:
+        articles.append({
+            "title": result.get("title", "No title"),
+            "url": result.get("url", "No URL"),
+            "date": result.get("date", "No date")
+        })
+    return articles
 
 @tool
 def get_current_time_in_timezone(timezone: str) -> str:
