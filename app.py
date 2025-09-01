@@ -1,4 +1,5 @@
 from smolagents import CodeAgent,DuckDuckGoSearchTool, HfApiModel,load_tool,tool
+from duckduckgo_search import DDGS
 import datetime
 import requests
 import pytz
