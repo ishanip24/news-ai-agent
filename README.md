@@ -14,5 +14,7 @@ tags:
 - tool
 - agent-course
 ---
+This AI Agent gives the current news based on the desired keywords. 
+Access the app here: https://huggingface.co/spaces/ishanip24/First_agent_template
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+Original template from https://huggingface.co/spaces/agents-course/First_agent_template.
